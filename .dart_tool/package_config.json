@@ -50,6 +50,24 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "cloud_firestore",
+      "rootUri": "file:///home/wappnet-52/.pub-cache/hosted/pub.dev/cloud_firestore-4.13.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "cloud_firestore_platform_interface",
+      "rootUri": "file:///home/wappnet-52/.pub-cache/hosted/pub.dev/cloud_firestore_platform_interface-6.0.10",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "cloud_firestore_web",
+      "rootUri": "file:///home/wappnet-52/.pub-cache/hosted/pub.dev/cloud_firestore_web-3.8.10",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
       "name": "collection",
       "rootUri": "file:///home/wappnet-52/.pub-cache/hosted/pub.dev/collection-1.17.2",
       "packageUri": "lib/",
@@ -350,7 +368,7 @@
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2023-12-15T14:28:36.919382Z",
+  "generated": "2023-12-15T15:26:00.933265Z",
   "generator": "pub",
   "generatorVersion": "3.1.3"
 }

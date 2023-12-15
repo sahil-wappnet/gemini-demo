@@ -7,17 +7,16 @@ import 'package:get/route_manager.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-); 
-  runApp(const MyApp());}
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  GetMaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.fadeIn,
       title: 'Gemini Demo',
@@ -26,4 +25,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

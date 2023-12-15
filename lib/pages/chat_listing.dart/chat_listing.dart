@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gemini_demo/pages/chat_listing.dart/controller/chat_listing_controller.dart';
-import 'package:gemini_demo/routes/app_route.dart';
 import 'package:gemini_demo/utils/responsive.dart';
 import 'package:get/get.dart';
 
@@ -26,7 +25,7 @@ class ChatListingScreen extends StatelessWidget {
                           Column(
                             children: [
                               Text(
-                                'Welcome,\nSahil Chudasama',
+                                'Welcome,\n${controller.userName}',
                                 style: TextStyle(
                                     color: Colors.blue, fontSize: hp(2)),
                               ),
@@ -52,13 +51,13 @@ class ChatListingScreen extends StatelessWidget {
                         child: SizedBox(
                       height: hp(85),
                       child: ListView.builder(
-                          itemCount: 100,
+                          itemCount: 1,
                           itemBuilder: ((context, index) {
                             return Card(child: Container(
                               margin: EdgeInsets.symmetric(vertical: hp(1),horizontal: wp(2)),
                               child: Row(
                                 children: [
-                                  Text('Name',style: TextStyle(fontSize: hp(2)),),
+                                  Text('New Chat',style: TextStyle(fontSize: hp(2)),),
                                 ],
                               ),
                             ));
@@ -69,10 +68,10 @@ class ChatListingScreen extends StatelessWidget {
               ),
               floatingActionButton: FloatingActionButton.extended(
                 onPressed: () {
-                  Get.toNamed(ROUTE_CHATS_SCREEN);
+                  controller.signOut();
                 },
-                icon: const Icon(Icons.add),
-                label: const Text('New Chat'),
+                icon: const Icon(Icons.logout),
+                label: const Text('Logout'),
               ));
         });
   }

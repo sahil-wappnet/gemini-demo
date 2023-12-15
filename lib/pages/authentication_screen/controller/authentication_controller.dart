@@ -1,9 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:gemini_demo/routes/app_route.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthenticationScreenController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   Rx<User?> user = Rx<User?>(null);
@@ -12,6 +15,20 @@ class AuthenticationScreenController extends GetxController {
   void onInit() {
     user.bindStream(_auth.authStateChanges());
     super.onInit();
+  }
+
+  Future<void> _storeUserDetails() async {
+    final User? userValue = _auth.currentUser;
+    if (userValue != null) {
+      final DocumentReference userDoc = firestore.collection('users').doc(userValue.uid);
+
+      await userDoc.set({
+        'userId': userValue.uid,
+        'displayName': userValue.displayName,
+        'email': userValue.email,
+      });
+    }
+    
   }
 
   Future<void> signInWithGoogle() async {
@@ -26,6 +43,8 @@ class AuthenticationScreenController extends GetxController {
       );
 
       await _auth.signInWithCredential(credential);
+      await _storeUserDetails();
+      Get.offAndToNamed(ROUTE_LISTING_CHATS_SCREEN);
     } catch (e) {
       print(e);
     }

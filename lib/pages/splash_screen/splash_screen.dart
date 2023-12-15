@@ -1,5 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gemini_demo/pages/splash_screen/binding/controller/splash_controller.dart';
+import 'package:gemini_demo/pages/splash_screen/controller/splash_controller.dart';
 import 'package:gemini_demo/routes/app_route.dart';
 import 'package:gemini_demo/utils/responsive.dart';
 import 'package:get/get.dart';
@@ -24,7 +25,25 @@ class SplashScreen extends StatelessWidget {
                 Future.delayed(
                   const Duration(seconds: 2),
                   () {
-                    Get.offAndToNamed(ROUTE_AUTH_SCREEN);
+    //                 controller.user.listen((User? user) {
+    //   if (user != null) {
+    //     // User is already logged in, redirect to Home Page
+    //     Get.offAndToNamed(ROUTE_LISTING_CHATS_SCREEN);
+    //   } else {
+    //     // User is not logged in, redirect to Authentication Page
+    //     Get.offAndToNamed(ROUTE_AUTH_SCREEN);
+    //   }
+    // });
+     FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user != null) {
+        // User is already logged in, redirect to Home Page
+        Get.offAndToNamed(ROUTE_LISTING_CHATS_SCREEN);
+      } else {
+        // User is not logged in, redirect to Authentication Page
+        Get.offAndToNamed(ROUTE_AUTH_SCREEN);
+      }
+    });
+                    
                   },
                 );
               }
