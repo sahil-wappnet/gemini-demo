@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyBqO6DGxtv2Bci7mRhU3bTqidoW-e4ZSgM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1027337731912</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.geminiDemo.RunnerTests</string>
+	<key>PROJECT_ID</key>
+	<string>gemini-demo-3f8d2</string>
+	<key>STORAGE_BUCKET</key>
+	<string>gemini-demo-3f8d2.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1027337731912:ios:91f64c242d4ee7f7027d7d</string>
+</dict>
+</plist>
