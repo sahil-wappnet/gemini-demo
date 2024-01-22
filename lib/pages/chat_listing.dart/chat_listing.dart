@@ -25,7 +25,7 @@ class ChatListingScreen extends StatelessWidget {
                           Column(
                             children: [
                               Text(
-                                'Welcome,\n${controller.userName}',
+                                'Welcome,\n${controller.retrievedUserData!.userName}',
                                 style: TextStyle(
                                     color: Colors.blue, fontSize: hp(2)),
                               ),
@@ -37,41 +37,57 @@ class ChatListingScreen extends StatelessWidget {
                             height: hp(6.5),
                             width: wp(13),
                             child: Center(
-                                child: Text(
-                              'S',
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: hp(3)),
-                            )),
+                                child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(50),
+                                    child: controller.retrievedUserData!
+                                            .userPhotoUrl.isEmpty
+                                        ? Text(
+                                            'S',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: hp(3)),
+                                          )
+                                        : Image.network(
+                                            controller.retrievedUserData!
+                                                .userPhotoUrl,
+                                            fit: BoxFit.cover,
+                                          ))),
                           )
                         ],
                       ),
                     ),
                     SingleChildScrollView(
-                      padding: EdgeInsets.symmetric(horizontal: wp(4)),
+                        padding: EdgeInsets.symmetric(horizontal: wp(4)),
                         child: SizedBox(
-                      height: hp(85),
-                      child: ListView.builder(
-                          itemCount: 1,
-                          itemBuilder: ((context, index) {
-                            return Card(child: Container(
-                              margin: EdgeInsets.symmetric(vertical: hp(1),horizontal: wp(2)),
-                              child: Row(
-                                children: [
-                                  Text('New Chat',style: TextStyle(fontSize: hp(2)),),
-                                ],
-                              ),
-                            ));
-                          })),
-                    )),
+                          height: hp(85),
+                          child: ListView.builder(
+                              itemCount: 1,
+                              itemBuilder: ((context, index) {
+                                return Card(
+                                    child: Container(
+                                  margin: EdgeInsets.symmetric(
+                                      vertical: hp(1), horizontal: wp(2)),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'New Chat',
+                                        style: TextStyle(fontSize: hp(2)),
+                                      ),
+                                    ],
+                                  ),
+                                ));
+                              })),
+                        )),
                   ],
                 ),
               ),
               floatingActionButton: FloatingActionButton.extended(
                 onPressed: () {
-                  controller.signOut();
+                  // controller.signOut();
+                  controller.navigateToNewChat();
                 },
-                icon: const Icon(Icons.logout),
-                label: const Text('Logout'),
+                icon: const Icon(Icons.add),
+                label: const Text('New chat'),
               ));
         });
   }

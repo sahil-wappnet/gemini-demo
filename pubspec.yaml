@@ -41,6 +41,8 @@ dependencies:
   firebase_auth: ^4.15.3
   google_sign_in: ^6.1.6
   cloud_firestore: ^4.13.6
+  flutter_chat_ui: ^1.6.10
+  get_storage: ^2.1.1
 
 dev_dependencies:
   flutter_test:

@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:gemini_demo/pages/chat_page/chat_page.dart';
 import 'package:get/state_manager.dart';
 
-// class chatPageController extends GetxController {
-  
-// }
+
 
 class chatPageController extends GetxController {
   final TextEditingController textController = TextEditingController();

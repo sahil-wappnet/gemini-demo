@@ -25,43 +25,40 @@ class SplashScreen extends StatelessWidget {
                 Future.delayed(
                   const Duration(seconds: 2),
                   () {
-    //                 controller.user.listen((User? user) {
-    //   if (user != null) {
-    //     // User is already logged in, redirect to Home Page
-    //     Get.offAndToNamed(ROUTE_LISTING_CHATS_SCREEN);
-    //   } else {
-    //     // User is not logged in, redirect to Authentication Page
-    //     Get.offAndToNamed(ROUTE_AUTH_SCREEN);
-    //   }
-    // });
-     FirebaseAuth.instance.authStateChanges().listen((User? user) {
-      if (user != null) {
-        // User is already logged in, redirect to Home Page
-        Get.offAndToNamed(ROUTE_LISTING_CHATS_SCREEN);
-      } else {
-        // User is not logged in, redirect to Authentication Page
-        Get.offAndToNamed(ROUTE_AUTH_SCREEN);
-      }
-    });
-                    
+                    FirebaseAuth.instance
+                        .authStateChanges()
+                        .listen((User? user) {
+                      if (user != null) {
+                        
+                        Get.offAndToNamed(ROUTE_LISTING_CHATS_SCREEN);
+                      } else {
+                        Get.offAndToNamed(ROUTE_AUTH_SCREEN);
+                      }
+                    });
                   },
                 );
               }
             }
             return Scaffold(
               body: Center(
-                  child: Column(
-                    mainAxisAlignment :MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        'assets/google.png',
-                        height: hp(17),
-                      ),
-                      Text('Gemini',style: TextStyle(color: Colors.grey,fontSize: hp(5),fontWeight: FontWeight.w400),)
-                    ],
-                  ),
-                  
-               ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/google.png',
+                      height: hp(17),
+                    ),
+                    Text(
+                      'Gemini',
+                      style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: hp(5),
+                          fontWeight: FontWeight.w400),
+                    )
+                  ],
+                ),
+              ),
             );
           },
         );

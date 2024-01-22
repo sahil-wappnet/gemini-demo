@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:gemini_demo/model/user_local_details.dart';
 import 'package:gemini_demo/routes/app_route.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthenticationScreenController extends GetxController {
@@ -19,14 +23,17 @@ class AuthenticationScreenController extends GetxController {
 
   Future<void> _storeUserDetails() async {
     final User? userValue = _auth.currentUser;
+    
     if (userValue != null) {
       final DocumentReference userDoc = firestore.collection('users').doc(userValue.uid);
-
+      
       await userDoc.set({
         'userId': userValue.uid,
         'displayName': userValue.displayName,
         'email': userValue.email,
       });
+      UserLocalData userLocalData = UserLocalData(userName: _auth.currentUser!.displayName!, userId: userValue.uid, userEmail: _auth.currentUser!.email!, userPhotoUrl: _auth.currentUser!.photoURL!,);
+      GetStorage().write('userLocalData', userLocalData.toMap());
     }
     
   }
@@ -46,7 +53,7 @@ class AuthenticationScreenController extends GetxController {
       await _storeUserDetails();
       Get.offAndToNamed(ROUTE_LISTING_CHATS_SCREEN);
     } catch (e) {
-      print(e);
+      log("$e");
     }
   }
 

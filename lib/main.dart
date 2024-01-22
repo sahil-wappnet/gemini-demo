@@ -4,8 +4,10 @@ import 'package:gemini_demo/firebase_options.dart';
 import 'package:gemini_demo/pages/splash_screen/splash_screen.dart';
 import 'package:gemini_demo/routes/app_page.dart';
 import 'package:get/route_manager.dart';
+import 'package:get_storage/get_storage.dart';
 
 Future<void> main() async {
+  await GetStorage.init();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());

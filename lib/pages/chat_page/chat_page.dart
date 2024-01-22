@@ -11,8 +11,7 @@ class ChatScreen extends StatelessWidget {
     return GetBuilder<chatPageController>(
       init: chatPageController(),
       builder: (controller) {
-        return Scaffold(
-          
+        return Scaffold(          
           body: Column(
             children: <Widget>[
               Flexible(
@@ -84,8 +83,8 @@ class ChatMessage extends StatelessWidget {
               ? Container()
               : Container(
                   margin: const EdgeInsets.symmetric(horizontal: 12.0),
-                  child: const CircleAvatar(
-                    child: Text('O'),
+                  child:  CircleAvatar(
+                    child: Image.asset('assets/google.png'),
                   ),
                 ),
           Expanded(
