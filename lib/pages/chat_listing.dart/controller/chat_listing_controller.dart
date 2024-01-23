@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gemini_demo/model/user_local_details.dart';
 import 'package:gemini_demo/routes/app_route.dart';
 import 'package:get/get.dart';
@@ -11,7 +12,7 @@ class ChatListingScreenController extends GetxController {
   // Rx<User?> user = Rx<User?>(null);
   Map<String, dynamic>? storedUserData;
   UserLocalData? retrievedUserData;
-  String? userName;
+  // String? userName;
 
 
   @override
@@ -30,8 +31,15 @@ class ChatListingScreenController extends GetxController {
     super.onInit();
   }
 
+  
+
   navigateToNewChat(){
-    Get.toNamed(ROUTE_CHATS_SCREEN);
+    Timestamp timestamp = Timestamp.now();
+    String uniqueId =
+        '${timestamp.seconds}${timestamp.nanoseconds}';
+    // GetStorage().write('currentChatId', uniqueId);
+    
+    Get.toNamed(ROUTE_CHATS_SCREEN,arguments: uniqueId);
   }
 
   // Future<void> signOut() async {

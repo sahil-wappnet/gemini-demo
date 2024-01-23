@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:gemini_demo/pages/chat_page/controller/chat_page_controller.dart';
 import 'package:get/get.dart';
@@ -8,54 +7,55 @@ class ChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return GetBuilder<chatPageController>(
-      init: chatPageController(),
-      builder: (controller) {
-        return Scaffold(          
-          body: Column(
-            children: <Widget>[
-              Flexible(
-                child: Obx(
-                  () => ListView.builder(
-                    reverse: true,
-                    itemCount: controller.messages.length,
-                    itemBuilder: (context, index) => controller.messages[index],
+        init: chatPageController(),
+        builder: (controller) {
+          controller.chatId = Get.arguments;
+          return Scaffold(
+            body: Column(
+              children: <Widget>[
+                Flexible(
+                  child: Obx(
+                    () => ListView.builder(
+                      reverse: true,
+                      itemCount: controller.messages.length,
+                      itemBuilder: (context, index) =>
+                          controller.messages[index],
+                    ),
                   ),
                 ),
-              ),
-              const Divider(height: 1.0),
-              Container(
-                decoration: BoxDecoration(color: Theme.of(context).cardColor),
-                child: _buildTextComposer(context,controller),
-              ),
-            ],
-          ),
-        );
-      }
-    );
+                
+                Container(
+                  decoration: BoxDecoration(color: Theme.of(context).cardColor),
+                  child: _buildTextComposer(context, controller),
+                ),
+              ],
+            ),
+          );
+        });
   }
 
   Widget _buildTextComposer(BuildContext context, controller) {
     return IconTheme(
       data: IconThemeData(color: Theme.of(context).primaryColor),
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 8.0),
+        margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
         child: Row(
           children: <Widget>[
             Flexible(
               child: TextField(
                 controller: controller.textController,
                 onSubmitted: controller.handleSubmitted,
-                decoration:
-                    const InputDecoration.collapsed(hintText: 'Type a message'),
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 4.0),
-              child: IconButton(
-                icon: const Icon(Icons.send),
-                onPressed: () =>
-                    controller.handleSubmitted(controller.textController.text),
+                decoration: InputDecoration(
+                  hintText: 'Type a message',
+                  border: const OutlineInputBorder(),
+                  suffixIcon: IconButton(
+                    icon: const Icon(Icons.send),
+                    onPressed: () => controller
+                        .handleSubmitted(controller.textController.text),
+                  ),
+                ),
               ),
             ),
           ],
@@ -66,10 +66,12 @@ class ChatScreen extends StatelessWidget {
 }
 
 class ChatMessage extends StatelessWidget {
+  final String userImage;
   final String text;
   final bool isUser;
 
-  const ChatMessage({Key? key, required this.text, required this.isUser})
+
+  const ChatMessage({Key? key, required this.text, required this.isUser,required this.userImage})
       : super(key: key);
 
   @override
@@ -83,7 +85,7 @@ class ChatMessage extends StatelessWidget {
               ? Container()
               : Container(
                   margin: const EdgeInsets.symmetric(horizontal: 12.0),
-                  child:  CircleAvatar(
+                  child: CircleAvatar(
                     child: Image.asset('assets/google.png'),
                   ),
                 ),
@@ -108,8 +110,10 @@ class ChatMessage extends StatelessWidget {
               ? Container()
               : Container(
                   margin: const EdgeInsets.symmetric(horizontal: 12.0),
-                  child: const CircleAvatar(
-                    child: Text('U'),
+                  child: CircleAvatar(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(50),
+                      child: Image.network(userImage)),
                   ),
                 ),
         ],

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gemini_demo/pages/chat_listing.dart/controller/chat_listing_controller.dart';
 import 'package:gemini_demo/utils/responsive.dart';
@@ -8,6 +9,8 @@ class ChatListingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final FirestoreService _firestoreService = FirestoreService();
+    final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     return GetBuilder<ChatListingScreenController>(
         init: ChatListingScreenController(),
         builder: (controller) {
@@ -60,23 +63,46 @@ class ChatListingScreen extends StatelessWidget {
                         padding: EdgeInsets.symmetric(horizontal: wp(4)),
                         child: SizedBox(
                           height: hp(85),
-                          child: ListView.builder(
-                              itemCount: 1,
-                              itemBuilder: ((context, index) {
-                                return Card(
-                                    child: Container(
-                                  margin: EdgeInsets.symmetric(
-                                      vertical: hp(1), horizontal: wp(2)),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        'New Chat',
-                                        style: TextStyle(fontSize: hp(2)),
-                                      ),
-                                    ],
-                                  ),
-                                ));
-                              })),
+                          // child: FutureBuilder<List<String>>(
+                          //   future: controller.fetchCollectionsForUser(
+                          //       controller.retrievedUserData!.userId),
+                          //   builder: (context, snapshot) {
+                          //     if (snapshot.connectionState ==
+                          //         ConnectionState.waiting) {
+                          //       return CircularProgressIndicator();
+                          //     } else if (snapshot.hasError) {
+                          //       return Text('Error: ${snapshot.error}');
+                          //     } else {
+                          //       List<String> collections = snapshot.data ?? [];
+                          //       return ListView.builder(
+                          //         itemCount: collections.length,
+                          //         itemBuilder: (context, index) {
+                          //           return ListTile(
+                          //             title: Text(collections[index]),
+                          //           );
+                          //         },
+                          //       );
+                          //     }
+                          //   },
+                          // ),
+                          // child:
+                          // ListView.builder(
+                          //     itemCount: 1,
+                          //     itemBuilder: ((context, index) {
+                          //       return Card(
+                          //           child: Container(
+                          //         margin: EdgeInsets.symmetric(
+                          //             vertical: hp(1), horizontal: wp(2)),
+                          //         child: Row(
+                          //           children: [
+                          //             Text(
+                          //               'New Chat',
+                          //               style: TextStyle(fontSize: hp(2)),
+                          //             ),
+                          //           ],
+                          //         ),
+                          //       ));
+                          //     })),
                         )),
                   ],
                 ),
