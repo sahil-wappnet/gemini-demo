@@ -1,10 +1,4 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
-import 'package:gemini_demo/firebase_options.dart';
-import 'package:gemini_demo/pages/splash_screen/splash_screen.dart';
-import 'package:gemini_demo/routes/app_page.dart';
-import 'package:get/route_manager.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:gemini_demo/utils/exports.dart';
 
 Future<void> main() async {
   await GetStorage.init();

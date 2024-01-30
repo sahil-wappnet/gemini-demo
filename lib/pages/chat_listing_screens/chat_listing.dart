@@ -1,6 +1,8 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:gemini_demo/pages/chat_listing.dart/controller/chat_listing_controller.dart';
+import 'package:gemini_demo/pages/chat_listing_screens/controller/chat_listing_controller.dart';
 import 'package:gemini_demo/utils/responsive.dart';
 import 'package:get/get.dart';
 
@@ -9,8 +11,9 @@ class ChatListingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final FirestoreService _firestoreService = FirestoreService();
-    final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    final CollectionReference collectionRef =
+        FirebaseFirestore.instance.collection('users');
+
     return GetBuilder<ChatListingScreenController>(
         init: ChatListingScreenController(),
         builder: (controller) {
@@ -63,30 +66,7 @@ class ChatListingScreen extends StatelessWidget {
                         padding: EdgeInsets.symmetric(horizontal: wp(4)),
                         child: SizedBox(
                           height: hp(85),
-                          // child: FutureBuilder<List<String>>(
-                          //   future: controller.fetchCollectionsForUser(
-                          //       controller.retrievedUserData!.userId),
-                          //   builder: (context, snapshot) {
-                          //     if (snapshot.connectionState ==
-                          //         ConnectionState.waiting) {
-                          //       return CircularProgressIndicator();
-                          //     } else if (snapshot.hasError) {
-                          //       return Text('Error: ${snapshot.error}');
-                          //     } else {
-                          //       List<String> collections = snapshot.data ?? [];
-                          //       return ListView.builder(
-                          //         itemCount: collections.length,
-                          //         itemBuilder: (context, index) {
-                          //           return ListTile(
-                          //             title: Text(collections[index]),
-                          //           );
-                          //         },
-                          //       );
-                          //     }
-                          //   },
-                          // ),
-                          // child:
-                          // ListView.builder(
+                          // child: ListView.builder(
                           //     itemCount: 1,
                           //     itemBuilder: ((context, index) {
                           //       return Card(
@@ -103,6 +83,29 @@ class ChatListingScreen extends StatelessWidget {
                           //         ),
                           //       ));
                           //     })),
+                          child: FutureBuilder<QuerySnapshot>(
+                            future: collectionRef.get(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const Center(child: SizedBox(height: 45,width: 45,child: CircularProgressIndicator(),));
+                              } else if (snapshot.hasError) {
+                                return Text('Error: ${snapshot.error}');
+                              } else {
+                                return ListView(
+                                    children: snapshot.data!.docs
+                                        .map((DocumentSnapshot document) {
+                                  Map<String, dynamic> data =
+                                      document.data() as Map<String, dynamic>;
+                                  log("Data : ${data.length}");
+                                  return const ListTile(
+                                    title: Text(''),
+                                    subtitle: Text(''),
+                                  );
+                                }).toList());
+                              }
+                            },
+                          ),
                         )),
                   ],
                 ),

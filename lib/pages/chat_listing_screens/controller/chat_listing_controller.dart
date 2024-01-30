@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gemini_demo/model/user_local_details.dart';
 import 'package:gemini_demo/routes/app_route.dart';
@@ -17,6 +19,7 @@ class ChatListingScreenController extends GetxController {
 
   @override
   void onInit() {
+    getDocs();
     storedUserData = GetStorage().read('userLocalData');
     if (storedUserData != null) {
       retrievedUserData = UserLocalData.fromMap(storedUserData!);
@@ -30,6 +33,22 @@ class ChatListingScreenController extends GetxController {
     // });
     super.onInit();
   }
+
+  Future getDocs() async {
+  // QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection("users").get();
+  // print('len : ${querySnapshot.docs.length}');
+  FirebaseFirestore.instance.collection("users").doc(retrievedUserData!.userId).collection('chats').get().then(
+  (value) {
+    log("Value is $value");
+    // value.docs.forEach(
+    //   (element) {
+    //     print(element.id);
+    //   },
+    // );
+  },
+);
+  
+}
 
   
 

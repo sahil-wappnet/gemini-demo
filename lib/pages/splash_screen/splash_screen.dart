@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gemini_demo/pages/splash_screen/controller/splash_controller.dart';
@@ -29,7 +31,7 @@ class SplashScreen extends StatelessWidget {
                         .authStateChanges()
                         .listen((User? user) {
                       if (user != null) {
-                        
+                        log("mobile number : ${user.phoneNumber}");
                         Get.offAndToNamed(ROUTE_LISTING_CHATS_SCREEN);
                       } else {
                         Get.offAndToNamed(ROUTE_AUTH_SCREEN);

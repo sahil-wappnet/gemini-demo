@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 double wp(double percentage) {
@@ -11,6 +11,6 @@ double hp(double percentage) {
   return result;
 }
 
-double dp(BuildContext context, double size) {
-  return size * MediaQuery.textScaleFactorOf(context);
-}
+// double dp(BuildContext context, double size) {
+//   return size * MediaQuery.textScaleFactorOf(context);
+// }

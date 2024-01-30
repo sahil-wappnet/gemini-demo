@@ -46,18 +46,27 @@ class ChatScreen extends StatelessWidget {
             Flexible(
               child: TextField(
                 controller: controller.textController,
-                onSubmitted: controller.handleSubmitted,
+                // onSubmitted: (){controller.uploadImageToFirebase();},
+                // onSubmitted: controller.handleSubmitted,
                 decoration: InputDecoration(
                   hintText: 'Type a message',
                   border: const OutlineInputBorder(),
                   suffixIcon: IconButton(
-                    icon: const Icon(Icons.send),
-                    onPressed: () => controller
-                        .handleSubmitted(controller.textController.text),
+                    icon: const Icon(Icons.attachment),
+                    onPressed: () {
+                      controller.pickImageFromGallery();
+                    },
                   ),
                 ),
               ),
             ),
+            IconButton(
+                    icon: const Icon(Icons.send),
+                    onPressed: () {
+                      controller
+                        .handleSubmitted(controller.textController.text);
+                    },
+                  ),
           ],
         ),
       ),
@@ -100,7 +109,8 @@ class ChatMessage extends StatelessWidget {
                     : const Text('Google Gemini',
                         style: TextStyle(fontWeight: FontWeight.bold)),
                 Container(
-                  margin: const EdgeInsets.only(top: 5.0),
+                  
+                  margin: const EdgeInsets.only(top: 4.0),
                   child: Text(text),
                 ),
               ],
@@ -109,6 +119,7 @@ class ChatMessage extends StatelessWidget {
           !isUser
               ? Container()
               : Container(
+                
                   margin: const EdgeInsets.symmetric(horizontal: 12.0),
                   child: CircleAvatar(
                     child: ClipRRect(

@@ -26,7 +26,6 @@ class AuthenticationScreenController extends GetxController {
     
     if (userValue != null) {
       final DocumentReference userDoc = firestore.collection('users').doc(userValue.uid);
-      
       await userDoc.set({
         'userId': userValue.uid,
         'displayName': userValue.displayName,
@@ -34,8 +33,7 @@ class AuthenticationScreenController extends GetxController {
       });
       UserLocalData userLocalData = UserLocalData(userName: _auth.currentUser!.displayName!, userId: userValue.uid, userEmail: _auth.currentUser!.email!, userPhotoUrl: _auth.currentUser!.photoURL!,);
       GetStorage().write('userLocalData', userLocalData.toMap());
-    }
-    
+    }    
   }
 
   Future<void> signInWithGoogle() async {
